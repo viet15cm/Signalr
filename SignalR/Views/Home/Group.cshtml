@@ -1,0 +1,47 @@
+﻿@model string
+@{
+}
+
+<h1>Đây là group 9f4327</h1>
+
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<AppUser> signInManager
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-2">To User</div>
+        <div class="col-4"><input value="@Model" type="text" id="userInput" /></div>
+    </div>
+    <div class="row">
+        <div class="col-2">Message</div>
+        <div class="col-4"><input type="text" id="messageInput" /></div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+    </div>
+</div>
+
+@if (signInManager.IsSignedIn(User))
+{
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SendMessage">Send Message</a>
+        </li>
+    }
+}
+
+<script>
+    "use strict";
+    document.getElementById("sendButton").addEventListener("click", function (event) {
+        var user = document.getElementById("userInput").value;
+        var message = document.getElementById("messageInput").value;
+        connection.invoke("SendSendMessageGroup", user, "9f4327", message).catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+</script>
